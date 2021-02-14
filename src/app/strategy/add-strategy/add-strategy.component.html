@@ -1,0 +1,91 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6 mx-auto">
+            <div class="text-center">
+                <h5>Add new strategy</h5>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 mx-auto">
+            <div>
+                <mat-label>1.Set time period of notification</mat-label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 mx-auto">
+            <div class="text-center">
+                <mat-radio-group class="radio-group" [(ngModel)]="choosenPeriod">
+                    <mat-radio-button class="radio-button" *ngFor="let period of periods" [value]="period">
+                        {{period}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-6 mx-auto">
+            <div>
+                <mat-label>2.Set time</mat-label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 mx-auto">
+            <div class="text-center">
+                <ngb-timepicker [(ngModel)]="time"
+                ng-model-options="{timezone: 'utc'}"></ngb-timepicker>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="choosenPeriod==='monthly'">
+        <div class="col-6 mx-auto">
+            <div>
+                <mat-label>3.Set day of month</mat-label>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="choosenPeriod==='monthly'">
+        <div class="col-6 mx-auto">
+            <div class="text-center">
+                <ngb-datepicker class="custom-datepicker px-3 pt-1 pb-3" #dp (dateSelect)="onDateSelection($event)"
+                    [displayMonths]="1" outsideDays="hidden" [showWeekdays]="false" navigation="none">
+                    <ng-template ngbDatepickerContent>
+                        <div *ngFor="let month of dp.state.months">
+                            <ngb-datepicker-month class="border rounded" [month]="month">
+                            </ngb-datepicker-month>
+                        </div>
+                    </ng-template>
+                </ngb-datepicker>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="choosenPeriod==='weekly'">
+        <div class="col-6 mx-auto">
+            <div>
+                <mat-label>3.Set day of week</mat-label>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="choosenPeriod==='weekly'">
+        <div class="col-6 mx-auto">
+            <div class="text-center">
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+                    [(ngModel)]="choosenDayOfWeek">
+                    <mat-radio-button class="example-radio-button" *ngFor="let day of dayOfWeek" [value]="day">
+                        {{day}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 mx-auto">
+            <div class="text-center">
+                <button mat-raised-button color="primary" (click)='submit()'>Add</button>
+            </div>
+        </div>
+    </div>
+
+</div>

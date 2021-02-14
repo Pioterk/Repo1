@@ -1,0 +1,93 @@
+
+<div class="row">
+    <div class="col-md-12 user-container" *ngIf='report'>
+        <h5 > Lista wiadomości dla raportu: <span style="color: forestgreen;">{{report.name}} </span> </h5>
+        <table class="table table-striped" matSort (matSortChange)="sortData($event)">
+            <colgroup>
+                <col class="sm" />
+                <col class="lg" />
+                <col class="lg" />
+           
+              </colgroup>
+            
+            <thead>
+                <tr>
+                    <th mat-sort-header="creationDate">Data utworzenia</th>
+                    <th mat-sort-header="type"> Type</th>
+                    <th mat-sort-header="name">User</th>
+                    <th mat-sort-header="email">Adress</th>
+                    <th mat-sort-header="subject">Subject</th>
+                    <th mat-sort-header="text">Text</th>
+                    <th mat-sort-header="generatedReport">File</th>
+                    <th mat-sort-header="sentDate">Status</th>
+                    <th mat-sort-header="errorCode">Error</th>
+               
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let message of messages">
+
+                    <td> {{message.creationDate |  date:'short' }} </td>
+                    <td> 
+                        <span *ngIf ='message.type==0'> E-mail </span>
+                        <span *ngIf ='message.type==1'> Zapis na dysku </span> 
+                    
+                    </td> 
+                    <td> {{message.userName}}</td>
+                    <td> {{message.email}}</td>
+                    <td> {{message.subject}}</td>
+                    <td> {{message.text}}</td>
+                    <td>
+                        <a *ngIf='message.generatedReport'
+                            href="{{serverFullUrl}}/generatedReport/{{message.generatedReport.id}}">{{message.generatedReport.name}}</a>
+                        <span *ngIf='message.type==1 && message.filePath'>
+                            {{message.filePath}} 
+                         
+                        </span>
+                        </td>
+                   
+                    <td>
+                        <span *ngIf='message.sentDate && message.type==0' style="color:green;">Wysłano {{message.sentDate}} </span>
+                        <span *ngIf='!message.sentDate && message.type==0' style="color: red;">Bład wysłania</span>
+    
+                        <span *ngIf='message.sentDate && message.type==1' style="color:green;">Utworzono {{message.sentDate}} </span>
+                        <span *ngIf='!message.sentDate && message.type==1' style="color: red;">Bład utworzenia </span>
+    
+                    </td>
+                    <td>
+                        <ul>
+    
+                            <li  *ngIf="message.errorCode[7]==1">
+                                <span> Svc connection error</span>
+                            </li>
+                            <li  *ngIf="message.errorCode[6]==1">
+                                <span> Report not found</span>
+                            </li>
+                            <li *ngIf="message.errorCode[5]==1">
+                                <span> Exception while retrving excel file</span>
+                            </li>
+                            <li *ngIf="message.errorCode[4]==1">
+                                <span> Couldn't send email</span>
+                            </li>
+                            <li *ngIf="message.errorCode[3]==1">
+                                <span> Wrong email addres for user</span>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+  
+  
+    <div class="col-md-12 user-container">
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+        (page)="onPaginateChange($event)">
+    </mat-paginator>
+    </div>
+
+
+</div>
+

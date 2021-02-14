@@ -1,0 +1,75 @@
+<div class="row" style="margin-top: 20px;">
+    
+    <div class="col-md-6 user-container">
+        <button mat-raised-button color="secondary" type='button'  (click) = exportToExcel()>Export to excel</button> 
+    </div>
+    <div class="col-md-6 user-container">
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+        (page)="onPaginateChange($event)">
+    </mat-paginator>
+    </div>
+
+
+</div>
+<div class="row">
+    <div class="col-md-12 user-container" #report>
+        <table class="table" matSort (matSortChange)="sortData($event)">
+            <colgroup>
+                <col class="sm" />
+                <col class="lg" />
+                <col class="lg" />
+           
+              </colgroup>
+            
+            <thead>
+                <tr>
+                    <th>
+                        <mat-form-field class="example-form-field">
+                            <mat-label>Id</mat-label>
+                            <input matInput type="number" [(ngModel)]="id" (input)='search()'>
+                            <button mat-button *ngIf="id" matSuffix mat-icon-button aria-label="Clear" (click)="clearId()">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </th>
+                    <th>
+                     
+        <mat-form-field class="example-form-field">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" [(ngModel)]="name" (input)='search()'>
+            <button mat-button *ngIf="name" matSuffix mat-icon-button aria-label="Clear" (click)="clearName()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+                    
+                    </th>
+                    <th>
+                        <mat-form-field class="example-form-field">
+                            <mat-label>Description</mat-label>
+                            <input matInput type="text" [(ngModel)]="description" (input)='search()'>
+                            <button mat-button *ngIf="description" matSuffix mat-icon-button aria-label="Clear"
+                                (click)="clearDescription()">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th mat-sort-header="Id"></th>
+                    <th mat-sort-header="Name"></th>
+                    <th mat-sort-header="Description"></th>
+                </tr>
+               
+                <tr *ngFor="let datapoint of datapoints">
+                    <td>#{{datapoint.Id}}</td>
+                    <td>{{datapoint.Name}}</td>
+                    <td>{{datapoint.Description}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

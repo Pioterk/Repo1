@@ -1,0 +1,21 @@
+
+div{
+  border-style:double;
+  border-color:transparent;
+  /* margin: 2px; */
+
+ 
+
+} 
+mat-radio-button{
+  margin-right: 10px;
+}
+
+
+  .center-block {
+    margin-left:auto;
+    margin-right:auto;
+    
+    display: block;
+    margin: auto;
+ }

@@ -1,0 +1,17 @@
+<div mat-dialog-content style="text-align:center; margin:auto; ">
+{{report.name}}
+
+<div *ngIf="status">
+    <span>{{status.text}}</span>
+    <div class="progress my-3">
+        <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+    attr.aria-valuenow="{{status.jobProgres}}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: status.jobProgres + '%' }">
+    {{status.jobProgres}}%
+  </div>
+  </div>
+  
+  </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button class="btn btn-link" (click)="onNoClick()">Cancel</button>
+</div>

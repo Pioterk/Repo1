@@ -1,0 +1,36 @@
+<div mat-dialog-content style="text-align:center; margin:auto; ">
+   
+    <table class="table table-striped">
+    <thead>
+        <th>
+           nazwa
+        </th>
+        <th>
+            Zmień
+        </th>
+     
+
+    </thead>
+      <tbody>
+      <tr *ngFor="let startegy of startegies">
+       
+        <td>{{startegy.name}} </td>
+        <td>  
+            <button mat-icon-button style="background-color: transparent;">
+            <i class="material-icons md-12" style="color: gray;"  (click)="delete(startegy)">delete</i>
+            </button>
+            
+        </td>
+      
+      </tr>
+      </tbody>
+    </table>
+  
+         <div *ngIf='startegies.length==0'><span>  No strategies!  </span></div>  
+  </div>
+  <div mat-dialog-actions>
+  <button mat-button class="btn btn-link" (click)="onNoClick()">Cancel</button> 
+  </div>
+  
+  
+  

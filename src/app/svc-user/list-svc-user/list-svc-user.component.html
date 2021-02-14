@@ -1,0 +1,37 @@
+<div class="col-md-10 user-container">
+
+    
+
+
+
+    <table class="table" matSort (matSortChange)="sortData($event)">
+      <thead>
+      <tr>
+   
+        <th mat-sort-header ="Name">Name</th>
+        <th mat-sort-header ="Email">E-mail</th>
+      
+  
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of svcUsers">
+     
+        <td>{{user.Name}}</td>
+        <td>{{user.Email}}</td>
+
+    
+   
+      </tr>
+      </tbody>
+    </table>
+  
+  
+  </div>
+  <div class="col-md-10 user-container">
+    <mat-paginator [length]="length"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="onPaginateChange($event)">
+  </mat-paginator>
+  </div>

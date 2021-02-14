@@ -1,0 +1,90 @@
+
+<div class="col-md-12 user-container">
+    <br>
+    <mat-label style="font-size: large;">System settings:</mat-label>
+    <br>
+    <br>
+    <table class="table table-striped">
+     
+    <tr>
+        <td>   <mat-label>Test communication with SVC</mat-label> </td>
+        <td></td>
+        <td> <button mat-raised-button color="secondary" type='button'  (click) = testComunication()>Test</button> </td>
+    </tr>  
+    <tr>
+        <td>   <mat-label>Send test email</mat-label> </td>
+        <td>   <input matInput type="text" [(ngModel)]="system.testEmail"> </td>
+        <td>  <button mat-raised-button color="secondary" type='button'  (click) = testEmail()>Test</button> </td>
+    </tr>
+    <tr>
+        <td>  <mat-label>Update data points from SVC</mat-label></td>
+        <td></td>
+        <td> <button mat-raised-button color="secondary" type='button'  (click) = updateDataPoints()>Update</button></td>
+    </tr>
+    <tr>
+        <td><mat-label>Update users from SVC</mat-label></td>
+        <td>
+            <div *ngIf="updateDataPointsStatus">
+                <span>{{updateDataPointsStatus.text}}</span>
+                <div class="progress my-3">
+                    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                attr.aria-valuenow="{{updateDataPointsStatus.jobProgres}}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: updateDataPointsStatus.jobProgres + '%' }">
+                {{updateDataPointsStatus.jobProgres}}%
+              </div>
+              </div>
+              </div>
+        </td>
+        <td>  <button mat-raised-button color="secondary" type='button'  (click) = updateUsers()>Update</button></td>
+    </tr>
+    <tr>
+        <td>    <mat-label>Manage strategies</mat-label></td>
+        <td></td>
+        <td> <button mat-raised-button color="secondary" type='button'  (click) = showStrategies()>Manege</button></td>
+    </tr>
+ 
+    <tr>
+        <td>   <mat-label>SVC address</mat-label> </td>
+        <td>   <input matInput type="text" [(ngModel)]="system.svcServer"> </td>
+        <td>   <button mat-raised-button color="secondary" type='button'  (click) = update()>Update</button> </td>
+    </tr>
+    <tr>
+        <td>   <mat-label>Email server</mat-label> </td>
+        <td>   <input matInput type="text" [(ngModel)]="system.smtpServer"> </td>
+        <td>  <button mat-raised-button color="secondary" type='button'  (click) = update()>Update</button></td>
+    </tr>
+    <tr>
+        <td>   <mat-label>Email port</mat-label> </td>
+        <td>   <input matInput type="number" [(ngModel)]="system.smtpPort"> </td>
+        <td>  <button mat-raised-button color="secondary" type='button'  (click) = update()>Update</button></td>
+    </tr>
+    <tr>
+        <td>   <mat-label>Email address</mat-label> </td>
+        <td>   <input matInput type="text" [(ngModel)]="system.mailAddress"> </td>
+        <td>  <button mat-raised-button color="secondary" type='button'  (click) = update()>Update</button></td>
+    </tr>
+    <tr>
+        <td>   <mat-label>Email password</mat-label> </td>
+        <td>   <input matInput type="password" [(ngModel)]="system.mailPassword"> </td>
+        <td>  <button mat-raised-button color="secondary" type='button'  (click) = update()>Update</button></td>
+    </tr>
+    <tr>
+        <td>   <mat-label>Place to store file</mat-label> </td>
+        <td>   <input matInput type="text" [(ngModel)]="system.pathForFiles"> </td>
+        <td>  <button mat-raised-button color="secondary" type='button'  (click) = testFilePath()>Test</button></td>
+    </tr>
+    <tr>
+        <td>   <mat-label>Days to store reports in database</mat-label> </td>
+        <td>   <input matInput type="number" [(ngModel)]="system.daysToKeepInDb"> </td>
+        <td> <button mat-raised-button color="secondary" type='button'  (click) = clearMessages()>Clear</button></td>
+    </tr>
+    <tr>
+        <td>   <mat-label>Database size</mat-label> </td>
+        <td>   {{system.numberOfRecords}}</td>
+        <td></td>
+    </tr>
+ 
+ 
+  
+    </table>
+</div>
+

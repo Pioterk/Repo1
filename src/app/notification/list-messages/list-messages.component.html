@@ -1,0 +1,79 @@
+<div mat-dialog-content style="text-align:center; margin:auto; ">
+
+    <table class="table table-striped">
+        <thead>
+            <th>Data utworzenia</th>
+            <th> Type</th>
+                 
+            <th>
+                User
+            </th>
+            <th>
+                Adress
+            </th>
+            <th>
+                File
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Error
+            </th>
+
+        </thead>
+        <tbody>
+            <tr *ngFor="let message of messages">
+
+                <td>{{message.creationDate}} </td>
+                <td> 
+                    <span *ngIf ='message.type==0'> E-mail </span>
+                    <span *ngIf ='message.type==1'> Zapis na dysku </span> 
+                
+                </td>
+                <td> {{message.userName}}</td>
+                <td> {{message.email}}</td>
+                <td>
+                    <span *ngIf='message.generatedReport' (click) = "getReport(message.generatedReport)" class= "ref"> {{message.generatedReport.name}}  </span>
+                    <span *ngIf='message.type==1 && message.filePath'>
+                    {{message.filePath}} 
+                </span>    
+                </td>
+
+                <td>
+                    <span *ngIf='message.sentDate && message.type==0' style="color:green;">Wysłano {{message.sentDate}} </span>
+                    <span *ngIf='!message.sentDate && message.type==0' style="color: red;">Bład wysłania</span>
+
+                    <span *ngIf='message.sentDate && message.type==1' style="color:green;">Utworzono {{message.sentDate}} </span>
+                    <span *ngIf='!message.sentDate && message.type==1' style="color: red;">Bład utworzenia </span>
+
+                </td>
+                <td>
+                    <ul>
+
+                        <li  *ngIf="message.errorCode[7]==1">
+                            <span> Svc connection error</span>
+                        </li>
+                        <li  *ngIf="message.errorCode[6]==1">
+                            <span> Report not found</span>
+                        </li>
+                        <li *ngIf="message.errorCode[5]==1">
+                            <span> Exception while retrving excel file</span>
+                        </li>
+                        <li *ngIf="message.errorCode[4]==1">
+                            <span> Couldn't send email</span>
+                        </li>
+                        <li *ngIf="message.errorCode[3]==1">
+                            <span> Wrong email addres for user</span>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf='messages.length==0'><span> No messages! </span></div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button class="btn btn-link" (click)="onNoClick()">Cancel</button>
+</div>

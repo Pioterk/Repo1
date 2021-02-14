@@ -1,0 +1,12 @@
+ul{
+    list-style-type: none;
+}
+.ref {
+    cursor:pointer;
+    color:#0099ff ;
+  
+  }
+  .ref:hover {
+    text-decoration:none;
+    text-decoration:underline;
+  }
