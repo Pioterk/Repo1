@@ -13,8 +13,6 @@ export class UserService {
     return this.http.get<SvcUser[]>(environment.apiUrl+serverURL+environment.apiPort+'/user');
   }
   getAllByNotification(serverURL: String, notificationId:number): Observable<SvcUser[]> {
-    console.log("ascascascacac")
-    console.log(environment.apiUrl+serverURL+environment.apiPort+'/user?notificationId'+notificationId)
     return this.http.get<SvcUser[]>(environment.apiUrl+serverURL+environment.apiPort+'/user?notificationId='+notificationId);
   }
   

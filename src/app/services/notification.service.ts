@@ -14,6 +14,7 @@ export class NotificationService {
   constructor(private http: HttpClient) { }
 
   getById(serverURL: String, notificationId : number): Observable<Notification> {
+    // console.log(environment.apiUrl+serverURL+environment.apiPort+'/notification?id='+notificationId);
     return this.http.get<Notification>(environment.apiUrl+serverURL+environment.apiPort+'/notification?id='+notificationId);
   }
   getAll(serverURL: String): Observable<Notification[]> {

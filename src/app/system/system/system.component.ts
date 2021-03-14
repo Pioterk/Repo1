@@ -38,7 +38,6 @@ export class SystemComponent implements OnInit {
     this.websocketService.messageAsObservable().subscribe(data=>{
       if (data.jobId==this.system.jobId){
         this.updateDataPointsStatus = data; 
-        console.log(data);
       }
     })
 

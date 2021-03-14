@@ -23,9 +23,9 @@ export class PageableListComponent implements OnInit {
   description: string='';
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   length = 100;
-  pageSize = 150;
+  pageSize = 100;
   currentPage = 0;
-  pageSizeOptions: number[] = [1, 5, 10, 50, 100, 150];
+  pageSizeOptions: number[] = [10, 50, 100, 200, 300 , 400, 500];
   constructor(
     private datapointService: DatapointService,
   ) { }
@@ -91,6 +91,13 @@ export class PageableListComponent implements OnInit {
     xlsx.utils.table_to_sheet(this.report.nativeElement);
     const wb: xlsx.WorkBook = xlsx.utils.book_new();
     xlsx.utils.book_append_sheet(wb, ws, 'Sheet1');
-    xlsx.writeFile(wb, 'report.xlsx');
+
+    if (this.name!=''){
+      xlsx.writeFile(wb, 'report '+this.name+'.xlsx');
+    } else if (this.description!=''){
+      xlsx.writeFile(wb, 'report '+this.description +'.xlsx');
+    }
+
+   
    }
 }

@@ -10,6 +10,8 @@ import { Notification} from '../../model/notification';
 import { Report } from 'src/app/model/report';
 import { ReportService} from '../../services/report.service';
 import { environment } from 'src/environments/environment';
+import { GenertedReportService } from '../../services/generted-report.service'
+import { GenertedReport } from 'src/app/model/generted-report';
 
 @Component({
   selector: 'app-list-message',
@@ -17,6 +19,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./list-message.component.css']
 })
 export class ListMessageComponent implements OnInit {
+  blob;
   notification: Notification;
   messages: Array<any>;
   notsortedMessages: Array<any>;
@@ -27,6 +30,7 @@ export class ListMessageComponent implements OnInit {
   report : Report;
   length = 100;
   pageSize = 10;
+  currentPage = 0;
   pageSizeOptions: number[] = [1, 5, 10, 50];
   pageEvent: PageEvent;
   serverFullUrl : string;
@@ -38,6 +42,7 @@ export class ListMessageComponent implements OnInit {
     public router: Router,
     public route: ActivatedRoute,
     public reportService : ReportService,
+    public genertedReportService : GenertedReportService
   ) { }
 
   ngOnInit(): void {
@@ -59,24 +64,23 @@ export class ListMessageComponent implements OnInit {
         this.notification = data;
       
       })
-      this.messageService.getAllActiveByNotification(this.serverURL, this.notificationId)
+      this.messageService.getAllActiveByNotificationPageable(this.serverURL, this.notificationId, this.currentPage, this.pageSize)
       .subscribe(data => {
-        this.messages = data.slice(0,this.pageSize);
-        this.notsortedMessages = data;
-        this.length = data.length;
-        console.log(data);
+        this.messages = data.content.slice(0,this.pageSize);
+        this.notsortedMessages = data.content;
+        this.length = data.totalElements;
       });
     }  
     if (this.reportId!=null){
-      this.messageService.getAllActiveByReport(this.serverURL, this.reportId)
+      this.messageService.getAllActiveByReportPageable(this.serverURL, this.reportId,this.currentPage, this.pageSize)
       .subscribe(data => {
-        for (let message of data){
+        this.messages = data.content.slice(0,this.pageSize);
+        this.notsortedMessages = data.content;
+        this.length = data.totalElements;
+        for (let message of this.messages){
           message.errorCode = this.convertToBin(message.errorCode);
       }
-        this.messages = data.slice(0,this.pageSize);
-        this.notsortedMessages = data;
-        this.length = data.length;
-        console.log(data);
+   
       });
     }
  
@@ -107,11 +111,40 @@ compare(a: number | string, b: number | string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1)*(a === null ? -1 : 1);
 }
 onPaginateChange(event){
-  this.messages = this.notsortedMessages.slice(event.pageIndex*event.pageSize,(event.pageIndex+1)*event.pageSize); 
+  if (this.notificationId!=null){
+    this.messageService.getAllActiveByNotificationPageable(this.serverURL, this.notificationId, event.pageIndex, event.pageSize)
+    .subscribe(data => {
+      this.messages = data.content.slice(0,this.pageSize);
+      this.notsortedMessages = data.content;
+      this.length = data.totalElements;
+    })
+  }
+  if (this.reportId!=null){
+    this.messageService.getAllActiveByReportPageable(this.serverURL, this.reportId, event.pageIndex, event.pageSize)
+    .subscribe(data => {
+      for (let message of data.content){
+        message.errorCode = this.convertToBin(message.errorCode);
+    }
+      this.messages = data.content.slice(0,this.pageSize);
+      this.notsortedMessages = data.content;
+      this.length = data.totalElements;
+    });
+  }
+
 }
 
 convertToBin(num : number) : string{
   var n = num.toString(2);
   return "00000000".substr(n.length) + n;
+}
+getReport(genertedReport : GenertedReport){
+  this.genertedReportService.getFile(this.serverURL, genertedReport.id).subscribe(data => {
+    this.blob = new Blob([data], {type: 'application/vnd.ms-excel'});
+    var downloadURL = window.URL.createObjectURL(data);
+    var link = document.createElement('a');
+    link.href = downloadURL;
+    link.download = genertedReport.name.toString();
+    link.click();
+  });
 }
 }

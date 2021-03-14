@@ -15,6 +15,7 @@ export class AddStrategyComponent implements OnInit {
   choosenPeriod: string = 'daily';
   choosenDayOfWeek: string = 'Poniedziałek';
   reportId:number;
+  notificationId : number;
   @ViewChild(NgbDatepicker, {static: true}) datepicker: NgbDatepicker;
 
   periods: string[] = ['daily', 'weekly', 'monthly'];
@@ -33,6 +34,7 @@ export class AddStrategyComponent implements OnInit {
     this.route.queryParams
     .subscribe(params => {
       this.reportId = params.reportId;
+      this.notificationId = params.notificationId;
     });
   }
   onDateSelection(date: NgbDate) {  
@@ -81,7 +83,13 @@ export class AddStrategyComponent implements OnInit {
       str.time = date;
     } 
     this.strategyService.save(this.serverURL, str).subscribe(data=>{
-      this.router.navigate(['/notification/add'],{ queryParams: { reportId: this.reportId}});
+      if (this.reportId!=null){
+        this.router.navigate(['/notification/add'],{ queryParams: { reportId: this.reportId}});
+      }else if (this.notificationId!=null){
+        this.router.navigate(['/notification/edit'],{ queryParams: { notificationId: this.notificationId}});
+
+      }
+     
     });
   }
 }

@@ -6,11 +6,11 @@ import { Report } from 'src/app/model/report';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { NotificationService} from '../../services/notification.service';
-import {SvcService} from '../../services/svc.service'
 import { WebsocketService} from '../../services/websocket.service';
 import { WsMessage } from 'src/app/model/ws-message';
 import { MatDialog } from '@angular/material/dialog';
 import { ProgressDialogComponent} from '../progress-dialog/progress-dialog.component'
+import { System } from 'src/app/model/system';
 @Component({
   selector: 'app-list-report',
   templateUrl: './list-report.component.html',
@@ -27,24 +27,23 @@ export class ListReportComponent implements OnInit {
   blob;
   message = '';
   fileInfos?: Observable<any>;
-  serverURL: String = window.location.href.split(/\/\//)[1].split(/\/|:/)[0]
+  serverURL: string = window.location.href.split(/\/\//)[1].split(/\/|:/)[0]
   serverFullUrl : String ;
   reports : Array<Report>;
   status: WsMessage;;
-  ssss:WsMessage;
+  system : System;
   constructor(private reportServicse : ReportService,
     private notificationService : NotificationService,
     public router: Router,
     public dialog: MatDialog,
-    public svcService : SvcService,
     public websocketService : WebsocketService) { }
 
   ngOnInit(): void {
-    
+
     this.serverFullUrl = environment.apiUrl+this.serverURL+environment.apiPort;
     this.reportServicse.getReports(this.serverURL).subscribe(data=>{
     this.reports = data;
-    this.websocketService.connect();
+
 
     for (let report of this.reports){
       this.notificationService.getAllByReport(this.serverURL, report.id).subscribe(data=>{

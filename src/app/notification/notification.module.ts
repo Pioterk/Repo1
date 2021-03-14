@@ -10,16 +10,13 @@ import { PickUpUserComponent } from './pick-up-user/pick-up-user.component';
 import { ListMessagesComponent } from './list-messages/list-messages.component';
 
 
-
-
-
-
 @NgModule({
   declarations: [ListNotificationComponent, AddNotificationComponent, EditNotificationComponent, NotificationCardComponent, PickUpUserComponent, ListMessagesComponent],
   imports: [
     CommonModule,
     NotificationRoutingModule,
     CommonutlisModule,
+
  
 
   ],

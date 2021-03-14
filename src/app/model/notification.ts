@@ -3,9 +3,9 @@ import { Strategy } from './strategy';
 
 export class Notification {
     id: number;
-    active: Boolean;
-    hardDrive : Boolean;
-    email :Boolean;
+    active: boolean;
+    hardDrive : boolean;
+    email :boolean;
     users: Array<any>;
     messages: Array<any>;
     strategies: Array<any>;

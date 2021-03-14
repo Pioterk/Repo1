@@ -16,6 +16,7 @@ import { NotificationModule } from '../notification/notification.module'
     MessageRoutingModule,
     CommonutlisModule,
     NotificationModule
-  ]
+  ],
+  exports: [ListMessageComponent]
 })
 export class MessagesModule { }

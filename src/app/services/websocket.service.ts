@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { WebSocketMessage } from '../model/web-socket-message';
 import { WsMessage } from '../model/ws-message';
 import {Observable} from 'rxjs';
 import {Subject} from 'rxjs';
+import { SystemService} from './system.service'
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +16,17 @@ export class WebsocketService {
   webSocketEndPoint: string = 'http://localhost:8080/ws';
   topic: string = "/topic/message";
   stompClient: any;
+  serverURL: string = window.location.href.split(/\/\//)[1].split(/\/|:/)[0];
   public  webSocketMessages:Array<WsMessage> = new Array(); 
-  constructor() {   }
+  constructor(private systemService: SystemService) {  
+
+   }
+  
   connect() {
+    let url = localStorage.getItem("url");
+    if (url!=null){
+         this.webSocketEndPoint = environment.apiUrl+ url+environment.apiPort+"/ws";
+     }
       console.log("Initialize WebSocket Connection");
       let ws = new SockJS(this.webSocketEndPoint);
       this.stompClient = Stomp.over(ws);

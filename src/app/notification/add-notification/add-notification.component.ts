@@ -82,7 +82,6 @@ export class AddNotificationComponent implements OnInit {
 
 
       this.notificationService.create(this.serverURL, assignStrategyTextNotificationToReport).subscribe(data=>{
-        console.log("assssssssssasas")
         this.router.navigate(['/report']);
       })
     } else{
@@ -116,9 +115,6 @@ export class AddNotificationComponent implements OnInit {
         
       });
     });
-  }
-  create(user){
-
   }
   remove(user){
 

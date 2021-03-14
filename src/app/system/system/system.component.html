@@ -18,21 +18,22 @@
     </tr>
     <tr>
         <td>  <mat-label>Update data points from SVC</mat-label></td>
-        <td></td>
+        <td> 
+            <div *ngIf="updateDataPointsStatus">
+            <span>{{updateDataPointsStatus.text}}</span>
+            <div class="progress my-3">
+                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+            attr.aria-valuenow="{{updateDataPointsStatus.jobProgres}}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: updateDataPointsStatus.jobProgres + '%' }">
+            {{updateDataPointsStatus.jobProgres}}%
+          </div>
+          </div>
+          </div></td>
         <td> <button mat-raised-button color="secondary" type='button'  (click) = updateDataPoints()>Update</button></td>
     </tr>
     <tr>
         <td><mat-label>Update users from SVC</mat-label></td>
         <td>
-            <div *ngIf="updateDataPointsStatus">
-                <span>{{updateDataPointsStatus.text}}</span>
-                <div class="progress my-3">
-                    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
-                attr.aria-valuenow="{{updateDataPointsStatus.jobProgres}}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: updateDataPointsStatus.jobProgres + '%' }">
-                {{updateDataPointsStatus.jobProgres}}%
-              </div>
-              </div>
-              </div>
+     
         </td>
         <td>  <button mat-raised-button color="secondary" type='button'  (click) = updateUsers()>Update</button></td>
     </tr>

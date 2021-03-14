@@ -16,7 +16,6 @@ export class StrategyService {
     return this.http.get<Strategy[]>(environment.apiUrl+serverURL+environment.apiPort+'/strategy');
   }
   save(serverURL: String, strategy: Strategy): Observable<any> {
-    console.log(strategy);
     return this.http.post(environment.apiUrl+serverURL+environment.apiPort+'/strategy', strategy);
   }
   remove(serverURL: String, strategy: Strategy): Observable<any> {

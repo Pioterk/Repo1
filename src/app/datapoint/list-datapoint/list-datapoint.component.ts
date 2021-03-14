@@ -22,7 +22,7 @@ export class ListDatapointComponent implements OnInit {
   administrator : Boolean = false;
   length = 100;
   pageSize = 10;
-  pageSizeOptions: number[] = [1, 5, 10, 50, 100, 150];
+  pageSizeOptions: number[] = [1, 5, 10, 50, 100, 150, 200, 300 , 400, 500];
   pageEvent: PageEvent;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 

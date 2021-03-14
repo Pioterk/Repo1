@@ -1,26 +1,16 @@
+
+
 <div mat-dialog-content style="text-align:center; margin:auto; ">
 
-    <table class="table table-striped">
+    <table class="table table-striped" matSort (matSortChange)="sortData($event)">
         <thead>
-            <th>Data utworzenia</th>
-            <th> Type</th>
-                 
-            <th>
-                User
-            </th>
-            <th>
-                Adress
-            </th>
-            <th>
-                File
-            </th>
-            <th>
-                Status
-            </th>
-            <th>
-                Error
-            </th>
-
+            <th mat-sort-header="creationDate">Data utworzenia</th>
+            <th mat-sort-header="type"> Type</th>
+            <th mat-sort-header="name">User</th>
+            <th mat-sort-header="email">Adress</th>
+            <th mat-sort-header="generatedReport">File</th>
+            <th mat-sort-header="sentDate">Status</th>
+            <th mat-sort-header="errorCode">Error</th>
         </thead>
         <tbody>
             <tr *ngFor="let message of messages">
@@ -76,4 +66,15 @@
 </div>
 <div mat-dialog-actions>
     <button mat-button class="btn btn-link" (click)="onNoClick()">Cancel</button>
+</div>
+<div class="row">
+  
+  
+    <div class="col-md-12 user-container">
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+        (page)="onPaginateChange($event)">
+    </mat-paginator>
+    </div>
+
+
 </div>

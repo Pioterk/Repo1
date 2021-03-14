@@ -38,12 +38,11 @@
                     <td> {{message.subject}}</td>
                     <td> {{message.text}}</td>
                     <td>
-                        <a *ngIf='message.generatedReport'
-                            href="{{serverFullUrl}}/generatedReport/{{message.generatedReport.id}}">{{message.generatedReport.name}}</a>
+                        <span *ngIf='message.generatedReport' (click) = "getReport(message.generatedReport)" class= "ref"> {{message.generatedReport.name}}  </span>
                         <span *ngIf='message.type==1 && message.filePath'>
-                            {{message.filePath}} 
-                         
-                        </span>
+                        {{message.filePath}} 
+                    </span> 
+                   
                         </td>
                    
                     <td>

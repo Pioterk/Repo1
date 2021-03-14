@@ -9,6 +9,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MessageService} from '../../services/messages.service';
 import { ListMessagesComponent} from '../list-messages/list-messages.component'
+import { Message } from 'src/app/model/message';
+import { MessageWraper } from 'src/app/model/message-wraper';
 
 @Component({
   selector: 'app-notification-card',
@@ -54,16 +56,25 @@ export class NotificationCardComponent implements OnInit {
       this.router.navigate(["report"])); 
     })
   }
+  edit(notification: Notification){
+    if (notification!=null){
+      this.router.navigate(['/notification/edit'],{ queryParams: { notificationId: this.notification.id}});
+    }
+    }
   showMessages(){
-    this.messageService.getAllActiveByNotification(this.serverURL, this.notification.id)
+    this.messageService.getAllActiveByNotificationPageable(this.serverURL, this.notification.id, 0,50)
     .subscribe(result => {
-      for (let message of result){
+      let messages : Array<Message> = result.content;
+      for (let message of messages){
           message.errorCode = this.convertToBin(message.errorCode);
       }
+      let  mw :MessageWraper = new MessageWraper();
+      mw.messages = messages;
+      mw.notification = this.notification;
       this.dialog.open(ListMessagesComponent, {
         width: '1000px',
         height: '1200px',
-        data: result
+        data: mw
       }).afterClosed().subscribe(result => {
        
        
