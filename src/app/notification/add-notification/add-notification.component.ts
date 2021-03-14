@@ -95,7 +95,7 @@ export class AddNotificationComponent implements OnInit {
     this.router.navigate(['/strategy/add'],{ queryParams: { reportId: this.reportId}});
   }
   addUser(){
-    this.userService.getAll(this.serverURL)
+    this.userService.getAllWithEmail(this.serverURL)
     .subscribe(result => {
       this.dialog.open(PickUpUserComponent, {
         width: '500px',
@@ -103,7 +103,7 @@ export class AddNotificationComponent implements OnInit {
         data: result
       }).afterClosed().subscribe(result => {
         if (result!=undefined){
-        
+          console.log(result);
           let existingUsers : Array<any> = this.users.filter(obj => obj.id == result.id);
      
           if (existingUsers.length==0){

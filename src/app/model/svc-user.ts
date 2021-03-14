@@ -1,5 +1,5 @@
 export class SvcUser {
-
+    k:number;
     ID: number;
     IsActive: boolean;
     UserName: String;

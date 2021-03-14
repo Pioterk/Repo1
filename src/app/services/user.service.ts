@@ -15,5 +15,8 @@ export class UserService {
   getAllByNotification(serverURL: String, notificationId:number): Observable<SvcUser[]> {
     return this.http.get<SvcUser[]>(environment.apiUrl+serverURL+environment.apiPort+'/user?notificationId='+notificationId);
   }
+  getAllWithEmail(serverURL: String): Observable<SvcUser[]> {
+    return this.http.get<SvcUser[]>(environment.apiUrl+serverURL+environment.apiPort+'/user?email=true');
+  }
   
 }

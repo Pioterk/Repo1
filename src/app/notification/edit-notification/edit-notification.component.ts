@@ -101,7 +101,7 @@ export class EditNotificationComponent implements OnInit {
     this.users = this.users.filter(obj => obj !== user);
   }
   addUser(){
-    this.userService.getAll(this.serverURL)
+    this.userService.getAllWithEmail(this.serverURL)
     .subscribe(result => {
       this.dialog.open(PickUpUserComponent, {
         width: '500px',
