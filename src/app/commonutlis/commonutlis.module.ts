@@ -22,9 +22,10 @@ import { MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule} from '@angular/material/sort';
 import { MatTableModule} from '@angular/material/table';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { PickUpUserComponent } from './pick-up-user/pick-up-user.component';
 
 @NgModule({
-  declarations: [AddcardComponent],
+  declarations: [AddcardComponent, PickUpUserComponent],
   imports: [
     CommonModule,
     FormsModule,

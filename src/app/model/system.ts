@@ -1,3 +1,5 @@
+import { SvcUser } from "./svc-user";
+
 export class System {
 
     numberOfRecords: number;
@@ -13,6 +15,7 @@ export class System {
     svcServer: string;
     testEmail: string;
     jobId: number;
+    apiUser: SvcUser;
 
 
 }

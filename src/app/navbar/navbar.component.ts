@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
 import { AuthService} from '../auth.service';
 @Component({
   selector: 'app-navbar',
@@ -10,15 +9,18 @@ import { AuthService} from '../auth.service';
 export class NavbarComponent implements OnInit {
   currentUser : String = null;
   administrator : Boolean = false;
-
+  specialist : Boolean = false;
+  operator : Boolean = false;
 
 
   constructor(private router: Router,
     private authService: AuthService) {}
 
   ngOnInit() {
-
+    this.administrator = this.authService.hasRole("Administrator");
+    this.specialist = this.authService.hasRole("Specialist");
     this.currentUser = localStorage.getItem("currentUser");
+    this.operator = this.authService.hasRole("Operator");
 
 
   }

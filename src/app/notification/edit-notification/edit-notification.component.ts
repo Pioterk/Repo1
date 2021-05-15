@@ -8,7 +8,7 @@ import { Strategy } from 'src/app/model/strategy';
 import { SvcUser } from 'src/app/model/svc-user';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { PickUpUserComponent} from '../pick-up-user/pick-up-user.component';
+import { PickUpUserComponent} from '../../commonutlis/pick-up-user/pick-up-user.component';
 import { AssignStrategyTextNotificationToReport } from 'src/app/model/assign-strategy-text-notification-to-report';
 
 @Component({

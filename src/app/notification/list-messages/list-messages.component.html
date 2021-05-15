@@ -5,12 +5,12 @@
     <table class="table table-striped" matSort (matSortChange)="sortData($event)">
         <thead>
             <th mat-sort-header="creationDate">Data utworzenia</th>
-            <th mat-sort-header="type"> Type</th>
-            <th mat-sort-header="name">User</th>
-            <th mat-sort-header="email">Adress</th>
-            <th mat-sort-header="generatedReport">File</th>
+            <th mat-sort-header="type"> Typ</th>
+            <th mat-sort-header="name">Użytkownik</th>
+            <th mat-sort-header="email">Adres</th>
+            <th mat-sort-header="generatedReport">P;lik</th>
             <th mat-sort-header="sentDate">Status</th>
-            <th mat-sort-header="errorCode">Error</th>
+            <th mat-sort-header="errorCode">Błąd</th>
         </thead>
         <tbody>
             <tr *ngFor="let message of messages">
@@ -42,19 +42,19 @@
                     <ul>
 
                         <li  *ngIf="message.errorCode[7]==1">
-                            <span> Svc connection error</span>
+                            <span> Błąd połączenia z Svc</span>
                         </li>
                         <li  *ngIf="message.errorCode[6]==1">
-                            <span> Report not found</span>
+                            <span> Plik raportu nie odnaleziony</span>
                         </li>
                         <li *ngIf="message.errorCode[5]==1">
-                            <span> Exception while retrving excel file</span>
+                            <span> Błąd wczytywania pliku raportu</span>
                         </li>
                         <li *ngIf="message.errorCode[4]==1">
-                            <span> Couldn't send email</span>
+                            <span> Nie powiodło się wysłania wiadomości</span>
                         </li>
                         <li *ngIf="message.errorCode[3]==1">
-                            <span> Wrong email addres for user</span>
+                            <span> Błędny adres e-mail</span>
                         </li>
                     </ul>
                 </td>
@@ -62,10 +62,10 @@
         </tbody>
     </table>
 
-    <div *ngIf='messages.length==0'><span> No messages! </span></div>
+    <div *ngIf='messages.length==0'><span> Brak wiadomości! </span></div>
 </div>
 <div mat-dialog-actions>
-    <button mat-button class="btn btn-link" (click)="onNoClick()">Cancel</button>
+    <button mat-button class="btn btn-link" (click)="onNoClick()">Anuluj</button>
 </div>
 <div class="row">
   

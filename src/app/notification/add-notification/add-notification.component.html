@@ -1,11 +1,11 @@
 
   <div class="form-container">
     <div class="col-md-6 offset-md-3">
-    <h4>Add new notification</h4>
+    <h4>Dodaj nowe powiadomienie</h4>
     <br>
     <form [formGroup]="notificationForm" (submit)="submit()">
       <mat-form-field class="form-field" appearance="outline">
-        <mat-label>Choose strategy</mat-label>
+        <mat-label>Wybierz sposób powiadomienia</mat-label>
         <mat-select formControlName="strategy">
           <mat-option *ngFor="let strategy of strategies" [value]="strategy">
             {{strategy.name}}
@@ -32,16 +32,16 @@
 
       <br>
     <mat-form-field class="form-field" appearance="outline" *ngIf='email'>
-        <mat-label> Subject of e-mail
+        <mat-label> Temat wiadomości e-mail
         </mat-label>
         <input matInput formControlName="subject" required>
         <mat-error *ngIf="notificationForm.controls.subject.touched && notificationForm.controls.subject.invalid">
-          <span *ngIf="notificationForm.controls.subject.errors.required">This field is mandatory.</span>
+          <span *ngIf="notificationForm.controls.subject.errors.required">To pole jest wymagane.</span>
       
         </mat-error>
       </mat-form-field>
       <mat-form-field class="form-field" appearance="outline" *ngIf='email' >
-        <mat-label> Text of email
+        <mat-label> Treść wiadomości e-mail
         </mat-label>
         <textarea matInput formControlName="text"
         cdkTextareaAutosize
@@ -49,10 +49,10 @@
         cdkAutosizeMaxRows="10">
        </textarea>
         <mat-error *ngIf="notificationForm.controls.text.touched && notificationForm.controls.text.invalid">
-          <span *ngIf="notificationForm.controls.text.errors.required">This field is mandatory.</span>
+          <span *ngIf="notificationForm.controls.text.errors.required">To pole jest wymagane.</span>
         </mat-error>
       </mat-form-field>
-      <button mat-raised-button color="secondary" type='button'  (click) = addUser() *ngIf='email' >Add Users</button>
+      <button mat-raised-button color="secondary" type='button'  (click) = addUser() *ngIf='email' >Dodaj użytkowników</button>
  
      
       <ul>

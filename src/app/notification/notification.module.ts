@@ -6,12 +6,11 @@ import { EditNotificationComponent } from './edit-notification/edit-notification
 import { NotificationRoutingModule } from './notification-routing.module'
 import { NotificationCardComponent } from './notification-card/notification-card.component';
 import { CommonutlisModule} from '../commonutlis/commonutlis.module';
-import { PickUpUserComponent } from './pick-up-user/pick-up-user.component';
 import { ListMessagesComponent } from './list-messages/list-messages.component';
 
 
 @NgModule({
-  declarations: [ListNotificationComponent, AddNotificationComponent, EditNotificationComponent, NotificationCardComponent, PickUpUserComponent, ListMessagesComponent],
+  declarations: [ListNotificationComponent, AddNotificationComponent, EditNotificationComponent, NotificationCardComponent, ListMessagesComponent],
   imports: [
     CommonModule,
     NotificationRoutingModule,
@@ -21,7 +20,7 @@ import { ListMessagesComponent } from './list-messages/list-messages.component';
 
   ],
   exports: [NotificationCardComponent],
-  entryComponents: [PickUpUserComponent, ListMessagesComponent ],
+  entryComponents: [ListMessagesComponent ],
   
 })
 export class NotificationModule { }

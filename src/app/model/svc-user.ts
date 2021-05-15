@@ -1,16 +1,19 @@
+import { Role } from "./role";
+
 export class SvcUser {
     k:number;
-    ID: number;
-    IsActive: boolean;
-    UserName: String;
-    Email: String;
-    PhoneNumber: String;
-    Name: String;
-    FallbackContact: String;
-    IsApiUser: boolean;
-    LastActivity: Date;
-    IsExternal: boolean;
+    id: number;
+    isActive: boolean;
+    userName: String;
+    email: String;
+    phoneNumber: String;
+    name: String;
+    fallbackContact: String;
+    isApiUser: boolean;
+    lastActivity: Date;
+    isExternal: boolean;
     notification : Notification;
     reports : Array<any>;
+    role : Role;
 
 }

@@ -7,22 +7,20 @@
         </mat-panel-title>
         <mat-panel-description style="justify-content: flex-end;">
           <span class="inline-text">
+      
             <button mat-icon-button style="background-color: transparent;">
-              <i class="material-icons md-12" style="color: gray;" *ngIf='administrator' (click)="edit(report)">edit</i>
-            </button>
-            <button mat-icon-button style="background-color: transparent;">
-              <i class="material-icons md-12" style="color: gray;" *ngIf='administrator'
+              <i class="material-icons md-12" style="color: gray;" *ngIf='administrator || specialist'
                 (click)="remove(report)">delete</i>
             </button>
             <button mat-icon-button style="background-color: transparent;">
-              <i class="material-icons md-12" style="color: gray;" *ngIf='administrator' (click)="list(report)">list</i>
+              <i class="material-icons md-12" style="color: gray;" *ngIf='administrator || specialist' (click)="list(report)">list</i>
             </button>
             <span (click) = "generateReport(report)" class= "ref"> Wygeneruj  </span>
          
           </span>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <ng-template matExpansionPanelContent>
+      <ng-template matExpansionPanelContent *ngIf='administrator || specialist'>
         <app-notification-card *ngFor="let notification of report.notifications" [report]='report'
           [notification]='notification' class="inline"></app-notification-card>
         <app-addcard class="inline" [report]="report"> </app-addcard>
@@ -33,7 +31,7 @@
         <mat-panel-title style="justify-content:space-evenly;">
           <input type="file" (change)="selectFile($event)" hidden id="actual-btn" />
           <label for="actual-btn" style="min-width:600px; justify-content:space-evenly; margin-top: 10px;">
-            <i class="material-icons md-12" style="color: gray; margin-left: 300px;" *ngIf='administrator'>add</i>
+            <i class="material-icons md-12" style="color: gray; margin-left: 300px;" *ngIf='administrator || specialist'>add</i>
           </label>
         </mat-panel-title>
       </mat-expansion-panel-header>

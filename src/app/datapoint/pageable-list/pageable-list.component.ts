@@ -96,6 +96,8 @@ export class PageableListComponent implements OnInit {
       xlsx.writeFile(wb, 'report '+this.name+'.xlsx');
     } else if (this.description!=''){
       xlsx.writeFile(wb, 'report '+this.description +'.xlsx');
+    } else{
+      xlsx.writeFile(wb, 'report'+'.xlsx');
     }
 
    

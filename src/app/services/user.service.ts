@@ -18,5 +18,9 @@ export class UserService {
   getAllWithEmail(serverURL: String): Observable<SvcUser[]> {
     return this.http.get<SvcUser[]>(environment.apiUrl+serverURL+environment.apiPort+'/user?email=true');
   }
+  assignUserToTeam(serverURL: String, userId:number, administrator: boolean, specialist : boolean, operator : boolean): Observable<any> {
+    console.log(environment.apiUrl+serverURL+environment.apiPort+'/user/assign-to-team', {svcUserId : userId, administrator : administrator, specialist : specialist, operator : operator })
+    return this.http.post(environment.apiUrl+serverURL+environment.apiPort+'/user/assign-to-team', {svcUserId : userId, administrator : administrator, specialist : specialist, operator : operator });
+  }
   
 }

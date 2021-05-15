@@ -1,33 +1,35 @@
 <nav class="navbar navbar-expand-lg navbar-light    " style="background-color: #e3f2fd;">
-    <a class="navbar-brand" href="#" style="font-size: 28px; color:dimgray; ">SVC Reporting Tool</a>
+    <a class="navbar-brand" href="#" style="font-size: 28px; color:rgb(77, 115, 199); ">SVC Reporting Tool</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/report']">Reports</a>
+          <a class="nav-link" [routerLink]="['/report']">Raporty</a>
         </li>  
-        <li class="nav-item ">
-          <a class="nav-link" [routerLink]="['/datapoint/list']">Data points</a>
+        <li class="nav-item " *ngIf = "administrator || specialist">
+          <a class="nav-link" [routerLink]="['/datapoint/list']">Punkty danych</a>
         </li>
-        <li class="nav-item ">
-          <a class="nav-link" [routerLink]="['/user']">Users</a>
+        <li class="nav-item " *ngIf = "administrator || specialist">
+          <a class="nav-link" [routerLink]="['/user']">Użytkownicy</a>
         </li>
       
           
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="administrator" >
           <a class="nav-link" [routerLink]="['/system']">System</a>
         </li>    
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <p class="navbar-text">Logged in as {{currentUser}} </p> 
-          <p class="navbar-text" *ngIf = administrator > <b> - as Administrator</b></p> 
+          <p class="navbar-text">Zalogowany jako {{currentUser}} </p> 
+          <p class="navbar-text" *ngIf = administrator > <b> - jako Administrator</b></p> 
+          <p class="navbar-text" *ngIf = specialist > <b> - jako Specjalista</b></p> 
+          <p class="navbar-text" *ngIf = operator > <b> - jakos Operator</b></p> 
        
         </li>
           <li class="nav-item">
-              <button class="btn btn-link" (click) ="logout()">Logout</button>
+              <button class="btn btn-link" (click) ="logout()">Wyloguj</button>
           </li>
       </ul>
     </div>

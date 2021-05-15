@@ -1,23 +1,25 @@
 
-
   <div class="row">
-
+  
     <div class="col-md-6 login-container">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="address">SVC address: (ex. http://192.168.0.1/)</label>
+          <label for="address">Adres Svc: (np. http://192.168.0.1/)</label>
           <input type="text" [(ngModel)] = "svcAddress" class="form-control" formControlName="address" id="address" autocomplete="off">
-          <div class="error" *ngIf="loginForm.controls['address'].hasError('required') && loginForm.controls['address'].touched">Address is required</div>
+          <div class="error" *ngIf="loginForm.controls['address'].hasError('required') && loginForm.controls['address'].touched">Adres jest wymagany</div>
         </div>
         <div class="form-group">
           <label for="login">Login:</label>
+          <div>
+          <span *ngIf = !system.apiUser.userName style="color: coral;">Nie zdefiniowano użytkownika Api. Zaloguj się danymi użytkownika, który posłuży do komunikacji z Svc.</span>
+        </div>
           <input type="text" class="form-control" formControlName="login" id="login" autocomplete="off">
-          <div class="error" *ngIf="loginForm.controls['login'].hasError('required') && loginForm.controls['login'].touched">Username is required</div>
+          <div class="error" *ngIf="loginForm.controls['login'].hasError('required') && loginForm.controls['login'].touched">To pole jest wymagane</div>
         </div>
         <div class="form-group">
           <label for="pwd">Password:</label>
           <input type="password" class="form-control" formControlName="password" id="pwd" autocomplete="off">
-          <div class="error" *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">Password is required</div>
+          <div class="error" *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">To pole jest wymagane</div>
         </div>
         <button class="btn btn-success" [disabled]="loginForm.invalid">Login</button>
     

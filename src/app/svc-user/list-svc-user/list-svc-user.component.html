@@ -1,27 +1,38 @@
 <div class="col-md-10 user-container">
-
-    
-
-
-
+    <div *ngIf="updateUserStatus">
+      <span>{{updateUserStatus.text}}</span>
+      <div class="progress my-3">
+          <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+      attr.aria-valuenow="{{updateUserStatus.jobProgres}}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: updateUserStatus.jobProgres + '%' }">
+      {{updateUserStatus.jobProgres}}%
+    </div>
+    </div>
+    </div>
     <table class="table" matSort (matSortChange)="sortData($event)">
       <thead>
       <tr>
    
         <th mat-sort-header ="Name">Name</th>
+        <th mat-sort-header ="UserName">UserName</th>
         <th mat-sort-header ="Email">E-mail</th>
-      
-  
+        <th mat-sort-header = "Administrator">Administrator</th>
+        <th mat-sort-header = "Specialist">Specialist</th>
+        <th mat-sort-header = "Operator">Operator</th>
+        <th mat-sort-header = "Edit"></th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let user of svcUsers">
      
-        <td>{{user.Name}}</td>
-        <td>{{user.Email}}</td>
-
-    
-   
+        <td>{{user.name}}</td>
+        <td>{{user.userName}}</td>
+        <td>{{user.email}}</td>
+        <td> <mat-checkbox class="example-margin"  [checked]="user.role.administrator" [disabled]="true"></mat-checkbox></td>
+        <td> <mat-checkbox class="example-margin"  [checked]="user.role.specialist" [disabled]="true"></mat-checkbox></td>
+        <td> <mat-checkbox class="example-margin"  [checked]="user.role.operator" [disabled]="true"></mat-checkbox></td>
+        <td>   <button mat-icon-button style="background-color: transparent;" *ngIf='administrator'>
+          <i class="material-icons md-12" style="color: gray;"  (click)="edit(user)">edit</i>
+        </button></td>
       </tr>
       </tbody>
     </table>

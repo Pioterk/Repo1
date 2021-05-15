@@ -11,6 +11,7 @@ import { WsMessage } from 'src/app/model/ws-message';
 import { MatDialog } from '@angular/material/dialog';
 import { ProgressDialogComponent} from '../progress-dialog/progress-dialog.component'
 import { System } from 'src/app/model/system';
+import { AuthService} from '../../auth.service';
 @Component({
   selector: 'app-list-report',
   templateUrl: './list-report.component.html',
@@ -19,6 +20,7 @@ import { System } from 'src/app/model/system';
 export class ListReportComponent implements OnInit {
   panelOpenState = false;
   administrator: Boolean = true;
+  specialist: Boolean = false;
   selectedFiles?: FileList;
   currentFile?: File;
   greeting: any;
@@ -36,10 +38,12 @@ export class ListReportComponent implements OnInit {
     private notificationService : NotificationService,
     public router: Router,
     public dialog: MatDialog,
+    private authService: AuthService,
     public websocketService : WebsocketService) { }
 
   ngOnInit(): void {
-
+    this.administrator = this.authService.hasRole("Administrator");
+    this.specialist = this.authService.hasRole("Specialist");
     this.serverFullUrl = environment.apiUrl+this.serverURL+environment.apiPort;
     this.reportServicse.getReports(this.serverURL).subscribe(data=>{
     this.reports = data;

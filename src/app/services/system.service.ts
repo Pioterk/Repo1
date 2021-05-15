@@ -16,12 +16,22 @@ export class SystemService {
   save(serverURL: String, system: System): Observable<any> {
     return this.http.post(environment.apiUrl+serverURL+environment.apiPort+'/system', system);
   }
-  
-  
+  chceckApiUser(serverURL: String): Observable<System>{
+    return this.http.get<System>(environment.apiUrl+serverURL+environment.apiPort+'/chceckApiUser');
+  }
+  removeApiUser(serverURL: String, system: System): Observable<any>{
+    return this.http.post(environment.apiUrl+serverURL+environment.apiPort+'/removeApiUser',system);
+  }
+
   getSvcAddress(serverURL: string): Observable<System> {
     return this.http.get<System>(environment.apiUrl+serverURL+environment.apiPort+'/svcaddress');
     
   }
+  getSvcAddressAndCheckApiUser(serverURL: string): Observable<System> {
+    return this.http.get<System>(environment.apiUrl+serverURL+environment.apiPort+'/svcaddress');
+    
+  }
+  
   clearMessages(serverURL: String, system: System):Observable<HttpResponse<any>>  {
     return this.http.post(environment.apiUrl+serverURL+environment.apiPort+'/system/clearMessages', system, { observe: 'response' }).pipe(
       catchError(this.handleClearFilesPError)
@@ -46,6 +56,8 @@ export class SystemService {
   updateUsers(serverURL: String, system: System): Observable<any> {
     return this.http.post(environment.apiUrl+serverURL+environment.apiPort+'/system/update/users', system);
   }
+
+  
   updateDataPoints(serverURL: String, system: System): Observable<any> {
     return this.http.post(environment.apiUrl+serverURL+environment.apiPort+'/system/update/datapoints', system);
   }

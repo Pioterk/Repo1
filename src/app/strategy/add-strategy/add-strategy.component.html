@@ -2,14 +2,14 @@
     <div class="row">
         <div class="col-6 mx-auto">
             <div class="text-center">
-                <h5>Add new strategy</h5>
+                <h5>Dodaj nową strategię powiadomiania</h5>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-6 mx-auto">
             <div>
-                <mat-label>1.Set time period of notification</mat-label>
+                <mat-label>1.Ustaw okres</mat-label>
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@
     <div class="row justify-content-center">
         <div class="col-6 mx-auto">
             <div>
-                <mat-label>2.Set time</mat-label>
+                <mat-label>2.Ustaw czas</mat-label>
             </div>
         </div>
     </div>
@@ -42,7 +42,7 @@
     <div class="row" *ngIf="choosenPeriod==='monthly'">
         <div class="col-6 mx-auto">
             <div>
-                <mat-label>3.Set day of month</mat-label>
+                <mat-label>3.Ustaw dzień miesiąca</mat-label>
             </div>
         </div>
     </div>
@@ -64,7 +64,7 @@
     <div class="row" *ngIf="choosenPeriod==='weekly'">
         <div class="col-6 mx-auto">
             <div>
-                <mat-label>3.Set day of week</mat-label>
+                <mat-label>3.Ustaw dzień tygodnia</mat-label>
             </div>
         </div>
     </div>
@@ -83,7 +83,7 @@
     <div class="row">
         <div class="col-6 mx-auto">
             <div class="text-center">
-                <button mat-raised-button color="primary" (click)='submit()'>Add</button>
+                <button mat-raised-button color="primary" (click)='submit()'>Dodaj</button>
             </div>
         </div>
     </div>

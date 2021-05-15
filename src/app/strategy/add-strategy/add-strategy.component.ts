@@ -42,22 +42,22 @@ export class AddStrategyComponent implements OnInit {
   }
   submit(){
     let str : Strategy = new Strategy();
+    let date : Date = new Date();
+    let tzo = (date.getTimezoneOffset()/60)*(-1);
+
+    date.setHours(this.time.hour+tzo);
+    date.setMinutes(this.time.minute);
+    str.time = date;
     if (this.choosenPeriod=='daily'){
      
       str.daily = true;
-      let date : Date = new Date();
-      date.setHours(this.time.hour);
-      date.setMinutes(this.time.minute);
-      str.time = date;
+  
     
     }else if (this.choosenPeriod == 'monthly'){
     
       str.monthly = true;
       str.dayOfMonth = this.dayOfMonth;
-      let date : Date = new Date();
-      date.setHours(this.time.hour);
-      date.setMinutes(this.time.minute);
-      str.time = date;
+  
     
     }else if (this.choosenPeriod == 'weekly'){
      
@@ -77,10 +77,7 @@ export class AddStrategyComponent implements OnInit {
       } else if (this.choosenDayOfWeek=='Niedziela'){
         str.dayOfWeek = 7;
       }
-      let date : Date = new Date();
-      date.setHours(this.time.hour);
-      date.setMinutes(this.time.minute);
-      str.time = date;
+  
     } 
     this.strategyService.save(this.serverURL, str).subscribe(data=>{
       if (this.reportId!=null){

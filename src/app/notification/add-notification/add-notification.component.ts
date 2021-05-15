@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService} from "../../services/user.service";
 import { MatDialog } from '@angular/material/dialog';
 import { AssignStrategyTextNotificationToReport } from 'src/app/model/assign-strategy-text-notification-to-report';
-import { PickUpUserComponent} from '../pick-up-user/pick-up-user.component';
+import { PickUpUserComponent} from '../../commonutlis/pick-up-user/pick-up-user.component';
 
 
 @Component({
@@ -67,7 +67,7 @@ export class AddNotificationComponent implements OnInit {
       if (this.notificationForm.controls['text'].valid){
         notification.text = this.notificationForm.controls['text'].value;
       }
-      console.log(this.notificationForm.controls['strategy'].valid);
+ 
       if (this.notificationForm.controls['strategy'].valid && (this.email || this.hardDrive)){
 
 
@@ -79,8 +79,6 @@ export class AddNotificationComponent implements OnInit {
       assignStrategyTextNotificationToReport.strategy = this.notificationForm.controls['strategy'].value
       assignStrategyTextNotificationToReport.reportId = this.reportId;
       assignStrategyTextNotificationToReport.users = this.users;
-
-
       this.notificationService.create(this.serverURL, assignStrategyTextNotificationToReport).subscribe(data=>{
         this.router.navigate(['/report']);
       })
@@ -103,7 +101,7 @@ export class AddNotificationComponent implements OnInit {
         data: result
       }).afterClosed().subscribe(result => {
         if (result!=undefined){
-          console.log(result);
+     
           let existingUsers : Array<any> = this.users.filter(obj => obj.id == result.id);
      
           if (existingUsers.length==0){
