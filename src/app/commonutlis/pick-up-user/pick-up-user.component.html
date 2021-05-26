@@ -1,0 +1,22 @@
+<div mat-dialog-content style="text-align:center; margin:auto; ">
+
+  <table class="table table-striped">
+
+    <tbody>
+    <tr *ngFor="let user of users">
+
+      <td>{{user.name}} {{user.email}}</td>
+      <td>
+        <button mat-button class="btn btn-link" [mat-dialog-close]="user" cdkFocusInitial>Add</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button class="btn btn-link" (click)="onNoClick()">Cancel</button>
+</div>
+  
+  

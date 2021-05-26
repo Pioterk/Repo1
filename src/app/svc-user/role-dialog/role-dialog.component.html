@@ -1,0 +1,17 @@
+<div mat-dialog-content>
+  <div>
+    {{user.userName}}
+  </div>
+  <mat-radio-group [(ngModel)]="selection">
+    <mat-radio-button class="example-margin" value="administrator">Administrator</mat-radio-button>
+    <mat-radio-button class="example-margin" value="specialist">Specialist</mat-radio-button>
+    <mat-radio-button class="example-margin" value="operator">Operator</mat-radio-button>
+  </mat-radio-group>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button class="btn btn-link" (click)="onNoClick()">Anuluj</button>
+  <button mat-button class="btn btn-link" (click)="change()">Zmień</button>
+
+</div>
