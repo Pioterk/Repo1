@@ -35,7 +35,7 @@ export class WebsocketService {
           _this.stompClient.subscribe(_this.topic, function (sdkEvent) {
               _this.onMessageReceived(sdkEvent);
           });
-          //_this.stompClient.reconnect_delay = 2000;
+
       }, this.errorCallBack);
   };
 
@@ -58,21 +58,12 @@ export class WebsocketService {
 * Send message to sever via web socket
 * @param {*} message 
 */
-  send(message) {
-      console.log("calling logout api via web socket");
-      this.stompClient.send("/app/hello", {}, JSON.stringify(message));
-  }
 
   onMessageReceived(message) {
     let obj  = JSON.parse(message.body);
-    // this.webSocketMessages.push(obj);
     this.wsSubject.next(obj);
-  }
-
-    
+  }    
   messageAsObservable() : Subject<WsMessage>{
       return this.wsSubject;
   }
-
-
 }

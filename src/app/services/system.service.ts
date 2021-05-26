@@ -16,6 +16,13 @@ export class SystemService {
   save(serverURL: String, system: System): Observable<any> {
     return this.http.post(environment.apiUrl+serverURL+environment.apiPort+'/system', system);
   }
+  savePwd(serverURL: String, system: System): Observable<any> {
+    return this.http.post(environment.apiUrl+serverURL+environment.apiPort+'/systempwd', system);
+  }
+  saveMailUser(serverURL: String, system: System): Observable<any> {
+    return this.http.post(environment.apiUrl+serverURL+environment.apiPort+'/systemmailuser', system);
+  }
+
   chceckApiUser(serverURL: String): Observable<System>{
     return this.http.get<System>(environment.apiUrl+serverURL+environment.apiPort+'/chceckApiUser');
   }
@@ -33,8 +40,9 @@ export class SystemService {
   }
   
   clearMessages(serverURL: String, system: System):Observable<HttpResponse<any>>  {
+
     return this.http.post(environment.apiUrl+serverURL+environment.apiPort+'/system/clearMessages', system, { observe: 'response' }).pipe(
-      catchError(this.handleClearFilesPError)
+
     );
   }
   testConncetion(serverURL: String, system: System):Observable<HttpResponse<any>>  {
@@ -110,20 +118,5 @@ export class SystemService {
     return throwError(
       'Something bad happened; please try again later.');
   }
-  private handleClearFilesPError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong.
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
-        window.alert("Unable to access location");
-    }
-    // Return an observable with a user-facing error message.
-    return throwError(
-      'Something bad happened; please try again later.');
-  }
+
 }

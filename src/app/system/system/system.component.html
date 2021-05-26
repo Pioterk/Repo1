@@ -84,10 +84,19 @@
         <td>  <button mat-raised-button color="secondary" type='button'  (click) = update()>Aktualizuj</button></td>
     </tr>
     <tr>
+      <td>
+        <mat-label>Użytkownik e-mail</mat-label>
+      </td>
+      <td><input type="text" [(ngModel)]="system.mailUserName"></td>
+      <td>
+        <button mat-raised-button color="secondary" type='button' (click)=updateMailUser()>Aktualizuj</button>
+      </td>
+    </tr>
+      <tr>
         <td>   <mat-label>Hasło e-mail</mat-label> </td>
         <td>   <input type="password" [(ngModel)]="mailPassword"> </td>
-        <td>  <button mat-raised-button color="secondary" type='button'  (click) = updatePassword()>Aktualizuj</button></td>
-    </tr>
+        <td>  <button mat-raised-button color="secondary" type='button' (click) = updatePassword()>Aktualizuj</button></td>
+      </tr>
     <tr>
         <td>   <mat-label>Scieżka przechowywania plików</mat-label> </td>
         <td>   <input type="text" [(ngModel)]="system.pathForFiles"> </td>
@@ -98,6 +107,15 @@
         <td>   <input  type="number" [(ngModel)]="system.daysToKeepInDb"> </td>
         <td> <button mat-raised-button color="secondary" type='button'  (click) = update()>Aktualizuj</button></td>
     </tr>
+      <tr>
+        <td>
+          <mat-label>Wyczśc wiadomości starsze niż {{system.daysToKeepInDb}} dni</mat-label>
+        </td>
+        <td></td>
+        <td>
+          <button mat-raised-button color="secondary" type='button' (click)=clear()>Wyczyść</button>
+        </td>
+      </tr>
     <tr>
         <td>   <mat-label>Rozmiar bazy [rekordy]</mat-label> </td>
         <td>   {{system.numberOfRecords}}</td>

@@ -6,17 +6,14 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
-import { environment } from 'src/environments/environment';
 import { MaincontainerComponent } from './maincontainer/maincontainer/maincontainer.component';
 import { UserService } from './services/user.service';
 import { ReportService } from './services/report.service';
 import { StrategyService } from './services/strategy.service';
 import { NotificationService } from './services/notification.service';
 import { MessageService } from './services/messages.service';
-import { UploadFilesService } from './services/upload-files.service';
 import { GenertedReportService } from './services/generted-report.service';
 import { LoginComponent } from './login/login.component'
-import { UploadFilesComponent } from './components/upload-files/upload-files.component';
 import { CommonutlisModule} from './commonutlis/commonutlis.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
@@ -30,7 +27,6 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    UploadFilesComponent,
     NavbarComponent,
     MaincontainerComponent,
     LoginComponent,
@@ -56,7 +52,7 @@ export function tokenGetter() {
 
 
   ],
-  providers: [UserService, MessageService,  GenertedReportService, NotificationService, ReportService, StrategyService, UploadFilesService, WebsocketService],
+  providers: [UserService, MessageService,  GenertedReportService, NotificationService, ReportService, StrategyService, WebsocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

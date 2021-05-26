@@ -20,8 +20,8 @@ export class AuthService {
     private router: Router) { }
 
     login(dto: { login: string, password: string, address: string}) {
-  
       return this.http.post<LoginResponse>(environment.apiUrl+ this.serverURL +environment.apiPort + this.API_URL, dto).pipe(
+     
         catchError(this.handleLoginError)
       );
     }

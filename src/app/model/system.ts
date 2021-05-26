@@ -16,6 +16,5 @@ export class System {
     testEmail: string;
     jobId: number;
     apiUser: SvcUser;
-
-
+    mailUserName: string;
 }

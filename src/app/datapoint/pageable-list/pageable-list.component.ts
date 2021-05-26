@@ -2,9 +2,6 @@ import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
 import { DatapointService } from '../../services/datapoint.service';
 import { MatSort } from '@angular/material/sort';
 import { Sort } from '@angular/material/sort';
-import { PageEvent } from '@angular/material/paginator';
-import { Router } from '@angular/router';
-import { DataPoint } from 'src/app/model/data-point';
 import * as xlsx from 'xlsx';
 
 @Component({
@@ -100,6 +97,6 @@ export class PageableListComponent implements OnInit {
       xlsx.writeFile(wb, 'report'+'.xlsx');
     }
 
-   
+  
    }
 }

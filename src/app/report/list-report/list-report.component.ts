@@ -128,10 +128,7 @@ export class ListReportComponent implements OnInit {
       });
 
     }
-  
-    edit(report : Report){
 
-    }
     remove(report : Report){
       this.reportServicse.delete(this.serverURL, report).subscribe(data=>{
         this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() => 
@@ -141,23 +138,10 @@ export class ListReportComponent implements OnInit {
     list(report : Report) {
       this.router.navigate(['/message/'],{ queryParams: { reportId: report.id}});
     }
-    doTest(){
-
-    }
-  
-   
-    connect(){
- 
-    }
   
     disconnect(){
       this.websocketService.disconnect();
     }
-  
-    sendMessage(){
-      this.websocketService.send(this.name);
-    }
-  
     handleMessage(message){
       this.greeting = message;
     }

@@ -24,6 +24,7 @@ export class SystemComponent implements OnInit {
   userJobId:number;
   datapointJobId:number;
   mailPassword: string;
+  mailUserName: string;
   serverURL: String = window.location.href.split(/\/\//)[1].split(/\/|:/)[0];
   users : Array<any> = new Array();
   constructor(
@@ -76,7 +77,7 @@ export class SystemComponent implements OnInit {
   testEmail(){
 
     this.systemService.testEmail(this.serverURL, this.system).subscribe(data=>{
-      console.log(data);
+
       if (data.status==200){
      
         window.alert("Test email have been sent correctly!");
@@ -120,11 +121,16 @@ export class SystemComponent implements OnInit {
   updatePassword(){
     let system:System = new System();
     system.mailPassword = this.mailPassword;
-    this.systemService.save(this.serverURL, system).subscribe(data=>{
+    this.systemService.savePwd(this.serverURL, system).subscribe(data=>{
     });
   }
-
-
+  updateMailUser(){
+    let system:System = new System();
+    system.mailUserName = this.system.mailUserName;
+    this.systemService.saveMailUser(this.serverURL, system).subscribe(data=>{
+    });
+  }
+  
  
   removeApiUser(){
     this.systemService.removeApiUser(this.serverURL, this.system).subscribe(data=>{
@@ -167,5 +173,14 @@ export class SystemComponent implements OnInit {
            
       });
     });
+  }
+  clear(){
+    this.systemService.clearMessages(this.serverURL, this.system).subscribe(data=>{
+      this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() => 
+      this.router.navigate(["system"])); 
+    })
+    
+
+
   }
 }

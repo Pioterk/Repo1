@@ -10,12 +10,15 @@ import { environment } from 'src/environments/environment';
 export class ReportService {
 
   constructor(private http: HttpClient) { }
+  
   getReports(serverURL: String): Observable<Report[]>{
     return this.http.get<Report[]>(environment.apiUrl+serverURL+environment.apiPort+'/reports');
   }
+  
   getReportsById(serverURL: String, reportId : number): Observable<Report>{
     return this.http.get<Report>(environment.apiUrl+serverURL+environment.apiPort+'/reports?id='+reportId);
   }
+  
   upload(serverURL: String, file: File): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
     formData.append('file', file);
@@ -25,25 +28,27 @@ export class ReportService {
     });
     return this.http.request(req);
   }
+  
   getReport(serverURL: String, id : number):Observable<any>  {
     return this.http.get(environment.apiUrl+serverURL+environment.apiPort+"/report/"+id);
   }
+  
   delete(serverURL: String, report : Report){
     return this.http.post(environment.apiUrl+serverURL+environment.apiPort+'/reports/remove', report);
   }
  
-  //download.service.ts
-getFile(serverURL: String, id : number) : Observable<BlobPart> {
+  getFile(serverURL: String, id : number) : Observable<BlobPart> {
   const httpOptions = {
     responseType: 'blob' as 'json',
   };
   return this.http.get<BlobPart>(environment.apiUrl+serverURL+environment.apiPort+"/report/"+id, httpOptions);
-}
-generateTest(serverURL: String, id : number, jobId : number) : Observable<BlobPart> {
+  }
+  
+  generateTest(serverURL: String, id : number, jobId : number) : Observable<BlobPart> {
   const httpOptions = {
     responseType: 'blob' as 'json',
   };
   return this.http.get<BlobPart>(environment.apiUrl+serverURL+environment.apiPort+"/reports/generate/"+id+"?jobId="+jobId, httpOptions);
-}
+  } 
 
 }
